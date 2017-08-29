@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelRentalBooking.Credential;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,7 +8,9 @@ using System.Web.Http;
 
 namespace HotelRentalBooking.Controllers
 {
+    [HasAuthorized]
     public class OccupaciesController : ApiController
     {
+
     }
 }
