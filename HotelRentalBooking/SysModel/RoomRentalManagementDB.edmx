@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RoomRentalManagementDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RoomRentalManagementDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Api">
           <Key>
             <PropertyRef Name="IdAPI" />
@@ -17,15 +17,17 @@
           <Key>
             <PropertyRef Name="IdCustomer" />
           </Key>
-          <Property Name="IdCustomer" Type="bigint" Nullable="false" />
+          <Property Name="IdCustomer" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="Phone" Type="nvarchar" MaxLength="500" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeNumber" />
           </Key>
-          <Property Name="EmployeeNumber" Type="bigint" Nullable="false" />
+          <Property Name="EmployeeNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" />
         </EntityType>
@@ -33,18 +35,19 @@
           <Key>
             <PropertyRef Name="OccupacyNumber" />
           </Key>
-          <Property Name="OccupacyNumber" Type="bigint" Nullable="false" />
+          <Property Name="OccupacyNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmloyeeNumber" Type="bigint" />
           <Property Name="DateOccupacied" Type="datetime" />
           <Property Name="IdCustomer" Type="bigint" />
           <Property Name="IdRoom" Type="bigint" />
           <Property Name="RateApplied" Type="bigint" />
+          <Property Name="IsPaid" Type="bit" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="IdReceipt" />
           </Key>
-          <Property Name="IdReceipt" Type="bigint" Nullable="false" />
+          <Property Name="IdReceipt" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeNumber" Type="bigint" />
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="TotalDays" Type="bigint" />
@@ -56,17 +59,17 @@
           <Key>
             <PropertyRef Name="IdRoom" />
           </Key>
-          <Property Name="IdRoom" Type="bigint" Nullable="false" />
+          <Property Name="IdRoom" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoomType" Type="nvarchar" MaxLength="500" />
           <Property Name="BedType" Type="nvarchar" MaxLength="500" />
           <Property Name="Rate" Type="bigint" />
           <Property Name="Status" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="Users">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
-          <Property Name="IdUser" Type="bigint" Nullable="false" />
+          <Property Name="IdUser" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="500" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
@@ -79,7 +82,7 @@
           <EntitySet Name="Occupacy" EntityType="Self.Occupacy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -98,15 +101,17 @@
           <Key>
             <PropertyRef Name="IdCustomer" />
           </Key>
-          <Property Name="IdCustomer" Type="Int64" Nullable="false" />
+          <Property Name="IdCustomer" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeNumber" />
           </Key>
-          <Property Name="EmployeeNumber" Type="Int64" Nullable="false" />
+          <Property Name="EmployeeNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -114,18 +119,19 @@
           <Key>
             <PropertyRef Name="OccupacyNumber" />
           </Key>
-          <Property Name="OccupacyNumber" Type="Int64" Nullable="false" />
+          <Property Name="OccupacyNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmloyeeNumber" Type="Int64" />
           <Property Name="DateOccupacied" Type="DateTime" Precision="3" />
           <Property Name="IdCustomer" Type="Int64" />
           <Property Name="IdRoom" Type="Int64" />
           <Property Name="RateApplied" Type="Int64" />
+          <Property Name="IsPaid" Type="Boolean" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="IdReceipt" />
           </Key>
-          <Property Name="IdReceipt" Type="Int64" Nullable="false" />
+          <Property Name="IdReceipt" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeNumber" Type="Int64" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="TotalDays" Type="Int64" />
@@ -137,7 +143,7 @@
           <Key>
             <PropertyRef Name="IdRoom" />
           </Key>
-          <Property Name="IdRoom" Type="Int64" Nullable="false" />
+          <Property Name="IdRoom" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoomType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="BedType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Rate" Type="Int64" />
@@ -147,7 +153,7 @@
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
-          <Property Name="IdUser" Type="Int64" Nullable="false" />
+          <Property Name="IdUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -183,6 +189,8 @@
                 <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -204,6 +212,7 @@
                 <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
                 <ScalarProperty Name="RateApplied" ColumnName="RateApplied" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -233,7 +242,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="RoomRentalManagementDBModel.User">
-              <MappingFragment StoreEntitySet="Users">
+              <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -258,7 +267,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

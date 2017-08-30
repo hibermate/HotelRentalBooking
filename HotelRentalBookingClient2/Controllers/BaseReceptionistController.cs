@@ -16,7 +16,7 @@ namespace HotelRentalBookingClient2.Controllers
             if (session == null)
             {
                 filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary(new { controller = "LoginAdmin", action = "Index" }));
+                    new RouteValueDictionary(new { controller = "Home", action = "Index" }));
             }
             base.OnActionExecuting(filterContext);
         }

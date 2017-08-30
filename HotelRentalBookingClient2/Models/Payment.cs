@@ -10,7 +10,6 @@ namespace HotelRentalBookingClient2.Models
     public partial class Payment
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long IdReceipt { get; set; }
 
         public long? EmployeeNumber { get; set; }

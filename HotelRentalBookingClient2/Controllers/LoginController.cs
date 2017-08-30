@@ -32,9 +32,14 @@ namespace HotelRentalBookingClient2.Controllers
                     _user.Password = result.Password;
                     _user.IdUser = result.IdUser;
                     _user.RoleID = result.RoleID;
-                    // Session.Add(Areas.Client.Common.CommonConstants.ADMIN_SESSION, _user);
+                    if (_user.RoleID == 1)
+                    {
+                        Session.Add(tools.Constants.RECEPTIONIST_SESSION, _user);
+                    }
+                    if (_user.RoleID == 2)
+                        Session.Add(tools.Constants.CASHIER_SESSION, _user);
 
-                    return RedirectToAction("Index", "Song");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

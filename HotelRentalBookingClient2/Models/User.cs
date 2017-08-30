@@ -6,10 +6,10 @@ namespace HotelRentalBookingClient2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("User")]
     public partial class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long IdUser { get; set; }
 
         [StringLength(50)]

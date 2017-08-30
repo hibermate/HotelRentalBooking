@@ -10,7 +10,6 @@ namespace HotelRentalBookingClient2.Models
     public partial class Customer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long IdCustomer { get; set; }
 
         [StringLength(500)]
@@ -18,5 +17,11 @@ namespace HotelRentalBookingClient2.Models
 
         [StringLength(500)]
         public string Phone { get; set; }
+
+        [StringLength(50)]
+        public string Username { get; set; }
+
+        [StringLength(50)]
+        public string Password { get; set; }
     }
 }

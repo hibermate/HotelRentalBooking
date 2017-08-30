@@ -145,6 +145,10 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="Areas\GuestArea\Views\web.config" />
+    <Content Include="Areas\GuestArea\Views\Home\Index.cshtml" />
+    <Content Include="Areas\GuestArea\Views\UserLogin\Index.cshtml" />
+    <Content Include="Areas\GuestArea\Views\UserLogin\SignUp.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -153,6 +157,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GuestArea\Controllers\HomeController.cs" />
+    <Compile Include="Areas\GuestArea\Controllers\UserLoginController.cs" />
+    <Compile Include="Areas\GuestArea\GuestAreaAreaRegistration.cs" />
+    <Compile Include="Areas\GuestArea\Models\GuestUserClient.cs" />
+    <Compile Include="Areas\GuestArea\ViewModels\SignUpModel.cs" />
     <Compile Include="Controllers\BaseCashierController.cs" />
     <Compile Include="Controllers\BaseReceptionistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -160,12 +169,14 @@
     <Compile Include="Controllers\OccupacyController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="DataFormsModel\LoginModel.cs" />
+    <Compile Include="DataFormsModel\OccupacyModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Api.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\HotelBookingDB.cs" />
     <Compile Include="Models\Occupacy.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Room.cs" />
@@ -189,6 +200,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Occupacy\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Occupacy\AddOccupacyPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -198,12 +211,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\GuestArea\Views\Shared\" />
     <Folder Include="Assets\build\" />
     <Folder Include="Assets\vendors\" />
     <Folder Include="Views\BaseCashier\" />
     <Folder Include="Views\BaseReceptionist\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Payment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

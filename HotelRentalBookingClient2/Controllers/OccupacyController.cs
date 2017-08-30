@@ -6,12 +6,16 @@ using System.Web.Mvc;
 
 namespace HotelRentalBookingClient2.Controllers
 {
-    public class OccupacyController : BaseReceptionistController
+    public class OccupacyController : Controller
     {
         // GET: Occupacy
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult AddOccupacyPage()
+        {
+            return View(); 
         }
     }
 }

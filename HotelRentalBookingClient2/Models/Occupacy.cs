@@ -10,7 +10,6 @@ namespace HotelRentalBookingClient2.Models
     public partial class Occupacy
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long OccupacyNumber { get; set; }
 
         public long? EmloyeeNumber { get; set; }
@@ -22,5 +21,7 @@ namespace HotelRentalBookingClient2.Models
         public long? IdRoom { get; set; }
 
         public long? RateApplied { get; set; }
+
+        public bool? IsPaid { get; set; }
     }
 }

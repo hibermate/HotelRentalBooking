@@ -5,13 +5,14 @@ namespace HotelRentalBookingClient2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class DBContext : DbContext
+    public partial class HotelBookingDB : DbContext
     {
-        public DBContext()
-            : base("name=DBContext")
+        public HotelBookingDB()
+            : base("name=HotelBookingDB")
         {
         }
 
+        public virtual DbSet<Api> Apis { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Occupacy> Occupacies { get; set; }

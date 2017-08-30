@@ -10,7 +10,6 @@ namespace HotelRentalBookingClient2.Models
     public partial class Room
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long IdRoom { get; set; }
 
         [StringLength(500)]

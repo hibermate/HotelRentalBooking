@@ -6,16 +6,16 @@ namespace HotelRentalBookingClient2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Employee")]
-    public partial class Employee
+    [Table("Api")]
+    public partial class Api
     {
         [Key]
-        public long EmployeeNumber { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long IdAPI { get; set; }
 
-        [StringLength(500)]
-        public string Name { get; set; }
+        [StringLength(250)]
+        public string ApiKey { get; set; }
 
-        [StringLength(500)]
-        public string Title { get; set; }
+        public bool? Status { get; set; }
     }
 }
