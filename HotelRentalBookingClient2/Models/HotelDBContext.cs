@@ -5,10 +5,10 @@ namespace HotelRentalBookingClient2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class HotelBookingDB : DbContext
+    public partial class HotelDBContext : DbContext
     {
-        public HotelBookingDB()
-            : base("name=HotelBookingDB")
+        public HotelDBContext()
+            : base("name=HotelDBContext")
         {
         }
 
@@ -18,6 +18,7 @@ namespace HotelRentalBookingClient2.Models
         public virtual DbSet<Occupacy> Occupacies { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomBooking> RoomBookings { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -1,7 +1,41 @@
-﻿
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<HotelRentalBookingClient2.Models.RoomBooking>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer ID</th>
+            <th>DateCheckin</th>
+            <th>RoomType</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {         
+            <tr id="row_@item.IdBooking">
+                <th scope="row">@item.IdBooking</th>
+                <td>@item.IdCustomer</td>             
+                <td>@item.DateCheckin.Value.ToString("MM/dd/yyyy")  </td>     
+               
+                <td>@item.RoomType</td>         
+                <td>
+                    @Ajax.ActionLink("Xóa", "DeleteSong", new { @id = item.IdBooking }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa bài hát này?",
+                   OnComplete = "$('#row_" + @item.IdBooking + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
 

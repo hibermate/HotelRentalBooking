@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = "~/Areas/GuestArea/Views/Shared/_Layout.cshtml";
+}
+@model HotelRentalBookingClient2.Areas.GuestArea.ViewModels.CustomerRoomBookingModel
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gentelella Alela! | </title>
+    <link href="~/Assets/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            @using (Html.BeginForm("RoomBooking", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <form>
+                    <fieldset>
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    
+                        <div class="form-group">      
+                            @Html.LabelFor(model => model.DateCheckin)                     
+                          @Html.TextBoxFor(model => model.DateCheckin, new { @class = "form-control", @autofocus = "autofocus", type = "date" })
+                        
+                          </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model=> model.RoomType)
+                            @Html.DropDownListFor(model => model.RoomType, new List<SelectListItem>
+                                   {
+                                     new SelectListItem { Text = "Phòng vip", Value = "Phòng vip"},
+                                     new SelectListItem { Text = "Phòng couple", Value = "Phòng couple"},
+                                     new SelectListItem { Text = "phòng twin", Value = "Phòng twin"},
+                                     new SelectListItem { Text  = "Phòng đơn",Value="Phòng đơn"},
+                               
+                                  }, "Chọn Loại Phòng",
+                                  new
+                                  {
+                                      @Style = "Width:100%;height:40px;",
+                                      @class = "form-control input-lg"
+                                  })
+                       
+                        </div>
+                        <center>
+                            <input type="submit" class="btn btn-default submit" value="Đặt Phòng" />                         
+                        </center>
+
+
+                    </fieldset>
+
+                </form>
+            }
+         
+
+
+            @*<div class="right_col">
+                <div class="page-title">
+                    <div class="col-md6 col-sm-12 col-xs-12">
+                        dsadasdsa
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Assets/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+
+    $('#myDatepicker2').datetimepicker({
+        format: 'DD/MM/YYYY'
+    });
+</script>

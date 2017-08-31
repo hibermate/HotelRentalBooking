@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
 @{
+    ViewBag.Title = "BookingResult";
     Layout = "~/Areas/GuestArea/Views/Shared/_Layout.cshtml";
 }
 
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -12,22 +14,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gentelella Alela! | </title>
-
+    <link href="~/Assets/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
 </head>
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
-          
+        <h1>Đặt Phòng thành Công</h1><br />
+            <h3>Thông tin đặt phòng </h3>
+            <label>Mã Đặt Phòng : @ViewBag.BookingID</label> <br />
+            <label>Ngày Nhận Phòng: @ViewBag.DateCheckin</label><br />
+            <label>Loại Phòng: @ViewBag.RoomType</label>
+            @*<label>@ViewBag.Status</label>*@
 
-            <div class="right_col">
-                <div class="page-title">
-                    <div class="col-md6 col-sm-12 col-xs-12">
-                     
-                    </div>
-                </div>
-            </div>
-          
+
+
         </div>
     </div>
 </body>

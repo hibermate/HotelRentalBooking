@@ -65,6 +65,16 @@
           <Property Name="Rate" Type="bigint" />
           <Property Name="Status" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="RoomBooking">
+          <Key>
+            <PropertyRef Name="IdBooking" />
+          </Key>
+          <Property Name="IdBooking" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCustomer" Type="bigint" />
+          <Property Name="DateCheckin" Type="datetime" />
+          <Property Name="RoomType" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="IdUser" />
@@ -82,6 +92,7 @@
           <EntitySet Name="Occupacy" EntityType="Self.Occupacy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomBooking" EntityType="Self.RoomBooking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -149,6 +160,16 @@
           <Property Name="Rate" Type="Int64" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="RoomBooking">
+          <Key>
+            <PropertyRef Name="IdBooking" />
+          </Key>
+          <Property Name="IdBooking" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCustomer" Type="Int64" />
+          <Property Name="DateCheckin" Type="DateTime" Precision="3" />
+          <Property Name="RoomType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="IdUser" />
@@ -166,6 +187,7 @@
           <EntitySet Name="Occupacies" EntityType="Self.Occupacy" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="RoomBookings" EntityType="Self.RoomBooking" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
       </Schema>
@@ -237,6 +259,17 @@
                 <ScalarProperty Name="BedType" ColumnName="BedType" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomBookings">
+            <EntityTypeMapping TypeName="RoomRentalManagementDBModel.RoomBooking">
+              <MappingFragment StoreEntitySet="RoomBooking">
+                <ScalarProperty Name="IdBooking" ColumnName="IdBooking" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="DateCheckin" ColumnName="DateCheckin" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

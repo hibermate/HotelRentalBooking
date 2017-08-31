@@ -65,10 +65,10 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
                     //thêm tài khoản
                  //  var _curentSession = (User)Session[CommonConstants.ADMIN_SESSION];
                     var result1 = new GuestUserClient().addCustomer(model);
-                    if(result1)
+                 
                     return RedirectToAction("Index", "Home");
-                    else
-                        RedirectToAction("SaiAdd", "Home");
+                  
+                   
                 }
             }
             return View();

@@ -31,6 +31,7 @@ namespace HotelRentalBooking.SysModel
         public virtual DbSet<Occupacy> Occupacies { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomBooking> RoomBookings { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

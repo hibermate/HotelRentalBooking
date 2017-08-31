@@ -28,8 +28,10 @@ namespace HotelRentalBooking.Controllers
 
             return Ok(result);
         }
+
         [HttpPost]
-        public IHttpActionResult AddCustomer(Customer customer)
+        [ResponseType(typeof(Customer))]
+        public IHttpActionResult PostCustomer(Customer customer)
         {
             if (!ModelState.IsValid)
             {

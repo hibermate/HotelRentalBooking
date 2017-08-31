@@ -58,7 +58,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Models
             _user.Name = model.Name;
             _user.Password = model.Password;
             _user.Username = model.Username;
-            _user.Password = model.Phone;
+            _user.Phone = model.Phone;
        
             try
             {
@@ -66,7 +66,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Models
                 client.BaseAddress = new Uri(tools.Constants.Base_URL);
                 client.DefaultRequestHeaders.Add("API_KEY", "12354678");               
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-                HttpResponseMessage response = client.PostAsJsonAsync("Customer/AddCustomer", _user).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("Customers/PostCustomer", _user).Result;
                 return response.IsSuccessStatusCode;
             }
             catch

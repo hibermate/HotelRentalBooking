@@ -166,15 +166,15 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="SysModel\RoomRentalManagementDB.Context.tt">
+    <Content Include="SysModel\RoomRentalManagementDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RoomRentalManagementDB.edmx</DependentUpon>
-      <LastGenOutput>RoomRentalManagementDB.Context.cs</LastGenOutput>
+      <DependentUpon>RoomRentalManagementDBEntities.edmx</DependentUpon>
+      <LastGenOutput>RoomRentalManagementDBEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SysModel\RoomRentalManagementDB.tt">
+    <Content Include="SysModel\RoomRentalManagementDBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RoomRentalManagementDB.edmx</DependentUpon>
-      <LastGenOutput>RoomRentalManagementDB.cs</LastGenOutput>
+      <DependentUpon>RoomRentalManagementDBEntities.edmx</DependentUpon>
+      <LastGenOutput>RoomRentalManagementDBEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -186,6 +186,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\OccupaciesController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
+    <Compile Include="Controllers\RoomBookingController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Credential\ApiKeyHandle.cs" />
@@ -195,40 +196,43 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysModel\Api.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SysModel\Customer.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SysModel\Employee.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SysModel\Occupacy.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SysModel\Payment.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SysModel\Room.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="SysModel\RoomRentalManagementDB.Context.cs">
+    <Compile Include="SysModel\RoomBooking.cs">
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysModel\RoomRentalManagementDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RoomRentalManagementDB.Context.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SysModel\RoomRentalManagementDB.cs">
+    <Compile Include="SysModel\RoomRentalManagementDBEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="SysModel\RoomRentalManagementDB.Designer.cs">
+    <Compile Include="SysModel\RoomRentalManagementDBEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RoomRentalManagementDB.edmx</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="SysModel\User.cs">
-      <DependentUpon>RoomRentalManagementDB.tt</DependentUpon>
+      <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -236,12 +240,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="SysModel\RoomRentalManagementDB.edmx">
+    <EntityDeploy Include="SysModel\RoomRentalManagementDBEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RoomRentalManagementDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>RoomRentalManagementDBEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SysModel\RoomRentalManagementDB.edmx.diagram">
-      <DependentUpon>RoomRentalManagementDB.edmx</DependentUpon>
+    <Content Include="SysModel\RoomRentalManagementDBEntities.edmx.diagram">
+      <DependentUpon>RoomRentalManagementDBEntities.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

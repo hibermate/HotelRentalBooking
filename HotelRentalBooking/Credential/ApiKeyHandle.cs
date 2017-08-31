@@ -21,7 +21,8 @@ namespace HotelRentalBooking.Credential
             if (checkApiKeyExists)
             {
                 string apikeyclient = Isheader.FirstOrDefault();
-              // isValidAPIkey = demoen.Keys.Count(x => x.status.Equals("true") && x.APIKey.Equals(apikeyclient)) > 0;
+                //
+             // isValidAPIkey = demoen.Keys.Count(x => x.status.Equals("true") && x.APIKey.Equals(apikeyclient)) > 0;
             }
 
             if (!isValidAPIkey)
