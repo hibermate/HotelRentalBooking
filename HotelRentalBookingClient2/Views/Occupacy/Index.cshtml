@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <table class="table table-striped">
@@ -13,7 +14,7 @@
             <th>Customer ID</th>
             <th>DateCheckin</th>
             <th>RoomType</th>
-            <th>Delete</th>
+            <th>Approve</th>
         </tr>
     </thead>
     <tbody>
@@ -26,9 +27,9 @@
                
                 <td>@item.RoomType</td>         
                 <td>
-                    @Ajax.ActionLink("Xóa", "DeleteSong", new { @id = item.IdBooking }, new AjaxOptions
+                    @Ajax.ActionLink("Xác Nhận", "ApproveRequest", new { IdBooking = item.IdBooking }, new AjaxOptions
                {
-                   Confirm = "Bạn có muốn xóa bài hát này?",
+                   Confirm = "Bạn muốn tiếp tục xử lý yêu cầu này?",
                    OnComplete = "$('#row_" + @item.IdBooking + "').remove()",
                    HttpMethod = "Delete"
                })

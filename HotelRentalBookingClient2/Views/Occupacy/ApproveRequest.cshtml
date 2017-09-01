@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "ApproveRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<HotelRentalBookingClient2.Models.Room>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Room ID</th>
+            <th>Rate</th>
+            <th>Room Type</th>
+            <th>Chose This</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.IdRoom">
+                <th scope="row">@item.IdRoom</th>
+                <td>@item.Rate  </td>
+                <td>@item.RoomType</td>
+                <td>
+                    @Ajax.ActionLink("Chọn", "ChoseRoom", new { IdRoom = item.IdRoom,IdBooking=ViewBag.IdBooking }, new AjaxOptions
+               {
+                   Confirm = "Chọn phòng này cho khách hàng?",
+                   OnComplete = "$('#row_" + @item.IdRoom + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+

@@ -18,11 +18,9 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.ViewModels
         public DateTime? DateCheckin { get; set; }
 
 
-        [Required(ErrorMessage = "Bạn chưa chọn loại phòng !")]
-    
+        [Required(ErrorMessage = "Bạn chưa chọn loại phòng !")] 
         [Display(Name ="Loại Phòng")]
-        public string RoomType { get; set; }
-      
+        public string RoomType { get; set; }      
         public bool? IsApproved { get; set; }
 
 
