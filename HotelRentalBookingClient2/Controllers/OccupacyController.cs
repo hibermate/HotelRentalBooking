@@ -21,10 +21,6 @@ namespace HotelRentalBookingClient2.Controllers
          
             return View(model);
         }
-        public ActionResult AddOccupacyPage()
-        {
-            return View(); 
-        }
 
         public ActionResult ApproveRequest(long IdBooking, int page = 1, int pageSize = 10)
         {

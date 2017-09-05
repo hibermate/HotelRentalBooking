@@ -1,0 +1,31 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "MakeBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <label>Ngày Xuất:  @ViewBag.Model.PaymentDate</label>
+
+    <br />
+                 <label>Tổng ngày tính : @ViewBag.Model.TotalDays</label>
+              <br />
+             <label>Tiền Phòng: @ViewBag.Model.AmountCharged</label>
+            <br />
+            <label>Tax: @ViewBag.Model.TaxAmount  </label>
+            <br />
+            <label>Tổng: @ViewBag.Model.PaymentTotal</label>
+
+            @Ajax.ActionLink("Xác Nhận", "Commit", new { OccupacyNumber= ViewBag.OccupacyNumber }, new AjaxOptions
+       {
+           Confirm = "Thanh toán ?",
+           OnComplete = "$('#row_" + ViewBag.Model + "').commit()",
+           HttpMethod = "Delete"
+       })
+
+</div>
+

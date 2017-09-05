@@ -21,7 +21,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.Password = tools.Encrypt.MD5Hash(model.Password);
+                model.Password = tools.Encrypt.MD5Hash(model.Password);
                 var result = new GuestUserClient().findUser(model);
 
                 if (result != null)
@@ -33,7 +33,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
                     _customer.Phone = result.Phone;
                   
                         Session.Add(tools.Constants.CUSTOMER_SESSION, _customer);
-
+                    Session.Add("name", _customer.Name);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -63,6 +63,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
                 else
                 {
                     //thêm tài khoản
+                    model.Password = tools.Encrypt.MD5Hash(model.Password);
                  //  var _curentSession = (User)Session[CommonConstants.ADMIN_SESSION];
                     var result1 = new GuestUserClient().addCustomer(model);
                  

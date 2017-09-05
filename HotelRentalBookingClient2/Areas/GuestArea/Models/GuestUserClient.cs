@@ -40,7 +40,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Models
                 client.BaseAddress = new Uri(HotelRentalBookingClient2.tools.Constants.Base_URL);
                 client.DefaultRequestHeaders.Add("API_KEY", "123456789");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-                HttpResponseMessage response = client.GetAsync("Customer/CheckCustomerName?username=" + username).Result;
+                HttpResponseMessage response = client.GetAsync("Customers/CheckCustomerName?username=" + username).Result;
 
                 if (response.IsSuccessStatusCode)
                     return true;

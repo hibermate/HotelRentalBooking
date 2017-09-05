@@ -15,7 +15,6 @@
     <link href="~/Assets/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="~/Assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
     <!-- bootstrap-progressbar -->
     <link href="~/Assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -38,7 +37,7 @@
                     <div class="profile clearfix">
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2>@HttpContext.Current.Session["name"].ToString()</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -49,27 +48,16 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="index.html">Dashboard</a></li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
-                                    </ul>
+                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>                                
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i> Đặt Phòng <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-edit"></i> Room booking <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="form.html">Đặt Mới</a></li>
-                                        <li><a href="form.html">Đổi thông tin đặt phòng</a></li>
+                                        <li><a href="~/GuestArea/Home/Roombooking">Booking</a></li>
+                                        <li><a href="form.html">Booking information</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="tables.html">Tables</a></li>
-                                        <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                                    </ul>
-                                </li>
+                           
 
 
                             </ul>
@@ -142,9 +130,7 @@
             <!-- /page content -->
             <!-- footer content -->
             <footer>
-                <div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-                </div>
+              
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->

@@ -1,4 +1,5 @@
-﻿using HotelRentalBookingClient2.ViewModels;
+﻿using HotelRentalBookingClient2.Models;
+using HotelRentalBookingClient2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,24 @@ namespace HotelRentalBookingClient2.Controllers
 
             return View(model);
         }
-        public ActionResult MakeBill(long IdOccupacy)
+        public ActionResult MakeBill(long OccupacyNumber)
         {
-            OccupacyClient OC = new OccupacyClient();
-            
+            PaymentClient PC = new PaymentClient();
+    
+            var model = PC.MakeBill(OccupacyNumber);
+            ViewBag.OccupacyNumber = OccupacyNumber;
+            ViewBag.model = model;      
+            return View();
+        }
+
+        public ActionResult Commit(long OccupacyNumber)
+        {
+            PaymentClient PC = new PaymentClient();
+
+            var model = PC.CommitBill(OccupacyNumber);
+            ViewBag.model = model;
+         
+
             return View();
         }
     }
