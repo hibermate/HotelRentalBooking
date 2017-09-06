@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HotelRentalBookingClient2.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseCashierController
     {
         // GET: Payment
         public ActionResult Index(int page = 1, int pageSize = 10)

@@ -12,9 +12,12 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
 {
     public class UserLoginController : Controller
     {
+
         // GET: GuestArea/UserLogin
         public ActionResult Index()
         {
+          
+
             return View();
         }
         public ActionResult Login(LoginModel model)
@@ -31,10 +34,10 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
                     _customer.Name = result.Name;
                     _customer.Password = result.Password;
                     _customer.Phone = result.Phone;
-                  
+                    _customer.IdCustomer = result.IdCustomer;
                         Session.Add(tools.Constants.CUSTOMER_SESSION, _customer);
                     Session.Add("name", _customer.Name);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "CustomerHome");
                 }
                 else
                 {
@@ -67,12 +70,20 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
                  //  var _curentSession = (User)Session[CommonConstants.ADMIN_SESSION];
                     var result1 = new GuestUserClient().addCustomer(model);
                  
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "CustomerHome");
                   
                    
                 }
             }
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
+            
+            return RedirectToAction("Index","UserLogin");
         }
     }
 }

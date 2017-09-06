@@ -19,5 +19,6 @@ namespace HotelRentalBookingClient2
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
+      
     }
 }

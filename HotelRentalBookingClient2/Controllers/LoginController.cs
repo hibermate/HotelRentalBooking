@@ -21,17 +21,18 @@ namespace HotelRentalBookingClient2.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.Password = tools.Encrypt.MD5Hash(model.Password);
+                model.Password = tools.Encrypt.MD5Hash(model.Password);
                 var result = new UsersClient().findUser(model);
 
                 if (result != null)
                 {
-                    User _user = new HotelRentalBookingClient2.Models.User();
+                    User _user = new User();
                     _user.Username = result.Username;
                     _user.Name = result.Name;
-                    _user.Password = result.Password;
+                    _user.Password = tools.Encrypt.MD5Hash( result.Password);
                     _user.IdUser = result.IdUser;
                     _user.RoleID = result.RoleID;
+                    Session.Add("name", _user.Name);
                     if (_user.RoleID == 1)
                     {
                         Session.Add(tools.Constants.RECEPTIONIST_SESSION, _user);
@@ -49,6 +50,17 @@ namespace HotelRentalBookingClient2.Controllers
             }
             return View("Index");
         }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
 
+            return RedirectToAction("Index", "Login");
+        }
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

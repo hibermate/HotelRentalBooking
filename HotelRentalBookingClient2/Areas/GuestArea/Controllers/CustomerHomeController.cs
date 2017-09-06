@@ -10,11 +10,17 @@ using System.Web.Mvc;
 
 namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
 {
-    public class HomeController : Controller
+    public class CustomerHomeController : Controller
     {
         // GET: GuestArea/Home
         public ActionResult Index()
         {
+            var session = (Customer)Session[tools.Constants.CUSTOMER_SESSION];
+           
+            if (session == null)
+            {
+                return RedirectToAction("Index", "UserLogin");
+            }
             return View();
         }
         [HttpGet]
@@ -27,16 +33,15 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
         {
             if (ModelState.IsValid)
             {
-           //    var _customer= (Customer)Session[Constants.CUSTOMER_SESSION];
-                //    model.IdCustomer = _customer.IdCustomer;
-                model.IdCustomer = 1;
+                var _customer= (Customer)Session[Constants.CUSTOMER_SESSION];
+                model.IdCustomer = _customer.IdCustomer;
                 model.IsApproved = false;
                 RoomBooking result = new BookingRoomClient().addBooking(model);
                 if (result!=null)
                 {
                     
                     ViewBag.RoomBooking = result.IdBooking;
-                    return RedirectToAction("BookingResult", "Home",new {
+                    return RedirectToAction("BookingResult", "CustomerHome",new {
                         IdBooking = result.IdBooking,
                         DateCheckin = result.DateCheckin,
                         RoomType = result.RoomType,
@@ -55,7 +60,7 @@ namespace HotelRentalBookingClient2.Areas.GuestArea.Controllers
         public ActionResult BookingResult(int IdBooking,DateTime DateCheckin,string RoomType,bool IsApproved)
         {
             ViewBag.BookingID = IdBooking;
-            ViewBag.DateCheckin = DateCheckin.ToString("MM/dd/YYYY");
+            ViewBag.DateCheckin = DateCheckin.ToString("MM/dd/yyyy");
             ViewBag.RoomType = RoomType;
             ViewBag.Status = "Wating for Approved";
             return View();

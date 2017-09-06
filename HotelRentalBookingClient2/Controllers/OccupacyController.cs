@@ -10,7 +10,7 @@ using HotelRentalBookingClient2.Models;
 
 namespace HotelRentalBookingClient2.Controllers
 {
-    public class OccupacyController : Controller
+    public class OccupacyController : BaseReceptionistController
     {
         // GET: Occupacy
         public ActionResult Index(int page = 1, int pageSize = 10)
@@ -42,7 +42,7 @@ namespace HotelRentalBookingClient2.Controllers
             if (result!=null)
             {
                 Occupacy _OC = result;
-                ViewBag.Date = _OC.DateOccupacied;
+                ViewBag.Date = _OC.DateOccupacied.GetValueOrDefault(DateTime.Now).ToString("MM/dd/yyyy");
                 ViewBag.IdOccupacy = _OC.OccupacyNumber;
                 ViewBag.IdRoom = _OC.IdRoom;
                 ViewBag.IdCustomer = _OC.IdCustomer;

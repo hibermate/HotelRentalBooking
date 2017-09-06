@@ -1,0 +1,5 @@
+https://www.linkedin.com/pulse/aspnet-web-api-pdf-download-utility-enrico-a  PDF generate
+https://developer.telerik.com/topics/net/5-ways-export-asp-net-word-pdf-file/
+
+https://www.igniteui.com/infragistics-word/overview
+http://techfunda.com/howto/309/export-data-into-ms-word-from-mvc

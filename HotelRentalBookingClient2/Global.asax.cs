@@ -11,8 +11,15 @@ namespace HotelRentalBookingClient2
     {
         protected void Application_Start()
         {
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+           
+        }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            Response.Redirect("/Home/Error");
         }
     }
 }

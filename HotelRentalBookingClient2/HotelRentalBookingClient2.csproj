@@ -170,12 +170,12 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="Areas\GuestArea\Views\web.config" />
-    <Content Include="Areas\GuestArea\Views\Home\Index.cshtml" />
+    <Content Include="Areas\GuestArea\Views\CustomerHome\Index.cshtml" />
     <Content Include="Areas\GuestArea\Views\UserLogin\Index.cshtml" />
     <Content Include="Areas\GuestArea\Views\UserLogin\SignUp.cshtml" />
     <Content Include="Areas\GuestArea\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\GuestArea\Views\Home\RoomBooking.cshtml" />
-    <Content Include="Areas\GuestArea\Views\Home\BookingResult.cshtml" />
+    <Content Include="Areas\GuestArea\Views\CustomerHome\RoomBooking.cshtml" />
+    <Content Include="Areas\GuestArea\Views\CustomerHome\BookingResult.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -186,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\GuestArea\Controllers\HomeController.cs" />
+    <Compile Include="Areas\GuestArea\Controllers\CustomerHomeController.cs" />
     <Compile Include="Areas\GuestArea\Controllers\UserLoginController.cs" />
     <Compile Include="Areas\GuestArea\GuestAreaAreaRegistration.cs" />
     <Compile Include="Areas\GuestArea\Models\BookingRoomClient.cs" />
@@ -242,6 +242,7 @@
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\MakeBill.cshtml" />
     <Content Include="Views\Payment\Commit.cshtml" />
+    <Content Include="Views\Login\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
