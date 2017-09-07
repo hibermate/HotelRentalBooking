@@ -6,6 +6,7 @@ using iTextSharp.text.pdf;
 using PdfSharp;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -20,49 +21,96 @@ namespace HotelRentalBooking.Controllers
     public class TestController : ApiController
     {
         private RoomRentalManagementDBEntities db = new RoomRentalManagementDBEntities();
-        public HttpResponseMessage ExportToWord()
+        [HttpGet]
+        public HttpResponseMessage Get(int id)
         {
-            // get the data from database
-            var data = db.Users.ToList();
-            // instantiate the GridView control from System.Web.UI.WebControls namespace
-            // set the data source
-            GridView gridview = new GridView();
-            gridview.DataSource = data;
-            gridview.DataBind();
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            // Clear all the content from the current response
-            response.ClearContent();
-            response.Buffer = true;
-            // set the header
-            response.Headers("content-disposition", "attachment;
-filename = itfunda.doc");
-            Response.ContentType = "application/ms-word";
-            Response.Charset = "";
-
-
-            string contentType = "application/ms-word";
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StreamContent(System.IO.File.OpenRead(filePath));
-            response.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
-            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.WriteLine("\"User'ID number\",\"FullName\",\"Username\",\"Role\"");
+         
+            List<User> users = db.Users.ToList();
+            foreach(var item in users)
             {
-                FileName = fileName
-            };
+                string rolestr="";
+                if (item.RoleID == 1) rolestr = Tools.CommonConstant.RECEPTIONIST_ROLE;
+                if (item.RoleID == 2) rolestr = Tools.CommonConstant.CASHIER_ROLE;
+                writer.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\"",
+                    item.IdUser,item.Name,item.Username,rolestr));
+            }
+            writer.Flush();
+            stream.Position = 0;
 
-            // create HtmlTextWriter object with StringWriter
-            using (StringWriter sw = new StringWriter())
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = "Export.csv" };
+            return result;
+        }
+        [HttpGet]
+        public HttpResponseMessage Get(string od)
+        {
+
+   
+            var dt = UserDataTable();
+
+            var memStream = new MemoryStream();
+            var streamWriter = new StreamWriter(memStream);
+
+            //streamWriter.WriteLine("{0}", "<TABLE>");
+            //foreach (DataRow rw in dt.Rows)
+            //{
+            //    streamWriter.WriteLine("{0}", "<TR>");
+            //    foreach (DataColumn cl in dt.Columns)
+            //    {
+            //        streamWriter.WriteLine("{0}", "<TD>");
+            //        streamWriter.WriteLine("{0}", rw[cl].ToString());
+            //        streamWriter.WriteLine("{0}", "</TD>");
+            //        streamWriter.WriteLine("{0}", "</TD>");
+            //    }
+            //    streamWriter.WriteLine("{0}", "</TR>");
+
+            //}
+            //streamWriter.WriteLine("{0}", "</TABLE>");
+            foreach (DataRow rw in dt.Rows)
             {
-                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                
+                foreach(DataColumn cl in dt.Columns)
                 {
-                    // render the GridView to the HtmlTextWriter
-                    gridview.RenderControl(htw);
-                    // Output the GridView content saved into StringWriter
-                    Response.Output.Write(sw.ToString());
-                    Response.Flush();
-                    Response.End();
+                    streamWriter.WriteLine("{0}","<TD>");
                 }
             }
-            return View();
+                streamWriter.Flush();
+            memStream.Seek(0, SeekOrigin.Begin);
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK) { Content = new ByteArrayContent(memStream.GetBuffer()) };
+            result.Content = new StreamContent(memStream);
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = "Report.xls" };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/excel");
+       
+         //   var response = ResponseMessage(result);
+            return result;
+
+
+           
+        }
+
+        public System.Data.DataTable UserDataTable()
+        {
+            List<User> users = db.Users.ToList();
+            System.Data.DataTable table = new System.Data.DataTable();
+            table.Columns.Add("User's Id", typeof(int));
+            table.Columns.Add("Full Name", typeof(string));
+            table.Columns.Add("Username", typeof(string));
+            table.Columns.Add("Role", typeof(string));
+            foreach (var item in users)
+            {
+                string rolestr = "";
+                if (item.RoleID == 1) rolestr = Tools.CommonConstant.RECEPTIONIST_ROLE;
+                if (item.RoleID == 2) rolestr = Tools.CommonConstant.CASHIER_ROLE;
+                table.Rows.Add(item.IdUser,item.Name,item.Username,rolestr);
+            }
+            return table;
         }
     }
 }

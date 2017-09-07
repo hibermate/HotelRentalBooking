@@ -17,6 +17,7 @@ namespace HotelRentalBooking.Controllers
     public class FileExportController : ApiController
     {
         private RoomRentalManagementDBEntities db = new RoomRentalManagementDBEntities();
+        [HttpGet]
         public HttpResponseMessage DownloadPdf()
         {
             string fileName = "";

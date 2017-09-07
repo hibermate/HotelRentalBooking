@@ -1,7 +1,10 @@
 ﻿using HotelRentalBookingClient2.DataFormsModel;
 using HotelRentalBookingClient2.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -30,7 +33,31 @@ namespace HotelRentalBookingClient2.ViewModels
                 return null;
             }
         }
+        public PdfDocument getUserReport()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(tools.Constants.Base_URL);
+                client.DefaultRequestHeaders.Add("API_KEY", "123456789");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+                HttpResponseMessage response = client.GetAsync("FileExport/DownloadPdf").Result;
+                var stream= response.Content.ReadAsStreamAsync();
+                Document document = new Document(iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
+                PdfWriter wri = PdfWriter.GetInstance(document, stream.Result);
+               var writer=new PdfCopy(document, stream.Result);
 
-       
+            
+              
+                if (response.IsSuccessStatusCode)
+                    return response.Content.ReadAsAsync<PdfDocument>().Result;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }
