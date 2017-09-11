@@ -15,7 +15,7 @@ using HotelRentalBookingClient2.DataFormsModel;
 
 namespace HotelRentalBooking.Controllers
 {
-    [HasAuthorized]
+    [HasCredential]
     public class OccupaciesController : ApiController
     {
         private RoomRentalManagementDBEntities db = new RoomRentalManagementDBEntities();

@@ -1,8 +1,59 @@
-﻿<!DOCTYPE html>
-@{
+﻿@model IEnumerable<HotelRentalBookingClient2.Models.User>
 
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!DOCTYPE html>
 
-<a href="http://localhost:59692/pdfFile/users_list.pdf" download="userlist">Download</a>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserReport</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleID)
+            </th>
+     
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleID)
+            </td>
+        
+        </tr>
+    }
+   
+            @Html.ActionLink("PDF", "Export", new { id = "PDF" }) |
+            @Html.ActionLink("Excel", "Export", new { id = "Excel" }) |
+            @Html.ActionLink("Word", "Export", new { id = "Word" })
+     
+    </table>
+</body>
+</html>

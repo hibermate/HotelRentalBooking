@@ -22,7 +22,7 @@ namespace HotelRentalBooking.Controllers
     {
         private RoomRentalManagementDBEntities db = new RoomRentalManagementDBEntities();
         [HttpGet]
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage GetCSV()
         {
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
@@ -48,53 +48,56 @@ namespace HotelRentalBooking.Controllers
             return result;
         }
         [HttpGet]
-        public HttpResponseMessage Get(string od)
+        public HttpResponseMessage GetXLS(string od)
         {
 
-   
+            GridView grid = new GridView();         
             var dt = UserDataTable();
-
-            var memStream = new MemoryStream();
-            var streamWriter = new StreamWriter(memStream);
-
-            //streamWriter.WriteLine("{0}", "<TABLE>");
-            //foreach (DataRow rw in dt.Rows)
-            //{
-            //    streamWriter.WriteLine("{0}", "<TR>");
-            //    foreach (DataColumn cl in dt.Columns)
-            //    {
-            //        streamWriter.WriteLine("{0}", "<TD>");
-            //        streamWriter.WriteLine("{0}", rw[cl].ToString());
-            //        streamWriter.WriteLine("{0}", "</TD>");
-            //        streamWriter.WriteLine("{0}", "</TD>");
-            //    }
-            //    streamWriter.WriteLine("{0}", "</TR>");
-
-            //}
-            //streamWriter.WriteLine("{0}", "</TABLE>");
-            foreach (DataRow rw in dt.Rows)
-            {
-                
-                foreach(DataColumn cl in dt.Columns)
-                {
-                    streamWriter.WriteLine("{0}","<TD>");
-                }
-            }
-                streamWriter.Flush();
-            memStream.Seek(0, SeekOrigin.Begin);
-
-            var result = new HttpResponseMessage(HttpStatusCode.OK) { Content = new ByteArrayContent(memStream.GetBuffer()) };
-            result.Content = new StreamContent(memStream);
+            grid.DataSource = dt;
+            grid.DataBind();
+            grid.GridLines = GridLines.Both;      
+            StringWriter strwritter = new StringWriter();
+            HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+            grid.HeaderStyle.Font.Bold = true;
+            grid.RenderControl(htmltextwrtter);
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StringContent(strwritter.ToString());
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = "Report.xls" };
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/excel");
        
-         //   var response = ResponseMessage(result);
+      
             return result;
 
 
            
         }
+        [HttpGet]
+        public HttpResponseMessage GetWord(int id)
+        {
 
+            GridView grid = new GridView();
+
+            var dt = UserDataTable();
+            grid.DataSource = dt;
+            grid.DataBind();
+            grid.GridLines = GridLines.Both;
+            StringWriter strwritter = new StringWriter();
+            HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+            htmltextwrtter.WriteLine("<center><b>User List TMA Hotel </b></center> \n");
+            grid.HeaderStyle.Font.Bold = true;
+            grid.Width = Unit.Percentage(100);
+            grid.RenderControl(htmltextwrtter);
+   
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StringContent(strwritter.ToString());
+          
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment") { FileName = "Report.doc" };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("text/ms-word");
+            return result;
+
+
+
+        }
         public System.Data.DataTable UserDataTable()
         {
             List<User> users = db.Users.ToList();

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace HotelRentalBookingClient2.Controllers
 {
-    public class PaymentController : BaseCashierController
+    public class PaymentController :Controller
     {
         // GET: Payment
         public ActionResult Index(int page = 1, int pageSize = 10)
@@ -42,10 +42,18 @@ namespace HotelRentalBookingClient2.Controllers
         public ActionResult UserReport()
         {
             UsersClient UC = new UsersClient();
-          
-            return View();
-        }
+            var dbusers = UC.GetAllUsers();
 
+    
+            return View(dbusers);
+        }
+        public FileResult Export(string id)
+        {
+            UsersClient Uc = new UsersClient();
+            ReportFileModel file = Uc.getReportFile(id);
+            return File(file.renderedBytes, file.mimeType);
+
+        }
    
         //public FileContentResult DownloadCSV()
         //{

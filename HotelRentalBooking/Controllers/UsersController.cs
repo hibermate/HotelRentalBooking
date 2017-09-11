@@ -15,7 +15,7 @@ namespace HotelRentalBooking.Controllers
     {
         private RoomRentalManagementDBEntities db = new RoomRentalManagementDBEntities();
 
-        [HasAuthorized]
+      //  [HasCredential]
             public IQueryable<User> GetAllUsers()
         {
 
@@ -36,6 +36,7 @@ namespace HotelRentalBooking.Controllers
 
             return Ok(result);
         }
+
 
 
     }

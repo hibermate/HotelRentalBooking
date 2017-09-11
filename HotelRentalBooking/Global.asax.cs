@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelRentalBooking.Credential;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace HotelRentalBooking
     {
         protected void Application_Start()
         {
+          //  GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiKeyHandle());
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
          

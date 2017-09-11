@@ -33,6 +33,26 @@ namespace HotelRentalBookingClient2.ViewModels
                 return null;
             }
         }
+        public List<User> GetAllUsers()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(tools.Constants.Base_URL);
+                client.DefaultRequestHeaders.Add("API_KEY", "123456789");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+
+                HttpResponseMessage response = client.GetAsync("Users/GetAllUsers").Result;
+
+                if (response.IsSuccessStatusCode)
+                    return response.Content.ReadAsAsync<List<User>>().Result;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public PdfDocument getUserReport()
         {
             try
@@ -51,6 +71,25 @@ namespace HotelRentalBookingClient2.ViewModels
               
                 if (response.IsSuccessStatusCode)
                     return response.Content.ReadAsAsync<PdfDocument>().Result;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public ReportFileModel getReportFile(string id)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(tools.Constants.Base_URL);
+                client.DefaultRequestHeaders.Add("API_KEY", "123456789");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+               // HttpResponseMessage response = client.GetAsync("Report/FileReport?id="+id).Result;
+                HttpResponseMessage response = client.PutAsJsonAsync("Report/FileReport?id=" + id, id).Result;
+                if (response.IsSuccessStatusCode)
+                    return response.Content.ReadAsAsync<ReportFileModel>().Result;
                 return null;
             }
             catch

@@ -13,6 +13,7 @@ namespace HotelRentalBookingClient2.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var session = (User)Session[Constants.CASHIER_SESSION];
+       
             if (session == null)
             {
                 filterContext.Result = new RedirectToRouteResult(

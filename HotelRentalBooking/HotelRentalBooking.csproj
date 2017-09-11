@@ -124,6 +124,10 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReportViewer.WebForms.12.0.2402.20\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
       <Private>True</Private>
@@ -134,10 +138,6 @@
     </Reference>
     <Reference Include="MigraDoc.RtfRendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -210,18 +210,30 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\OccupaciesController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RoomBookingController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\FileExportController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Credential\ApiKeyHandle.cs" />
-    <Compile Include="Credential\HasAuthorizedAttribute.cs" />
+    <Compile Include="Credential\HasCredentialAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingRequestModel.cs" />
+    <Compile Include="Models\ReportFileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomRentalManagement2DBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomRentalManagement2DBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RoomRentalManagementDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomRentalManagementDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SysModel\Api.cs">
       <DependentUpon>RoomRentalManagementDBEntities.tt</DependentUpon>
     </Compile>
@@ -275,6 +287,28 @@
     <Content Include="SysModel\RoomRentalManagementDBEntities.edmx.diagram">
       <DependentUpon>RoomRentalManagementDBEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="RoomRentalManagementDBDataSet.xsc">
+      <DependentUpon>RoomRentalManagementDBDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="RoomRentalManagement2DBDataSet.xsc">
+      <DependentUpon>RoomRentalManagement2DBDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="RoomRentalManagement2DBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RoomRentalManagement2DBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="RoomRentalManagement2DBDataSet.xss">
+      <DependentUpon>RoomRentalManagement2DBDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="RoomRentalManagementDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RoomRentalManagementDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="RoomRentalManagementDBDataSet.xss">
+      <DependentUpon>RoomRentalManagementDBDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -293,6 +327,10 @@
       <Project>{1E5C04F4-01BB-4F2E-A377-A6308030697C}</Project>
       <Name>HotelRentalBookingClient2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\Report244.rdlc" />
+    <EmbeddedResource Include="Reporting\Report236.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
